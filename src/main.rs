@@ -8,10 +8,17 @@ fn main() {
              .short("t")
              .long("token")
              .value_name("HASH")
+             .required(true)
              .help("Access token for discord communications"))
+        .arg(Arg::with_name("channel")
+             .short("c")
+             .long("channel")
+             .required(true)
+             .value_name("CHANNEL"))
         .get_matches();
 
-    if let Some(token) = matches.value_of("token") {
-        println!("token: {}", token);
-    }
+    let token = matches.value_of("token").unwrap();
+    let channel = matches.value_of("channel").unwrap();
+    println!("token: {}", token);
+    println!("channel: {}", channel);
 }
