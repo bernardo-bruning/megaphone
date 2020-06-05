@@ -20,10 +20,12 @@ fn main() {
 
     let mut bufferio = BufReader::new(io::stdin());
     let mut message = String::new();
-    bufferio.read_line(&mut message).unwrap();
-    let token = matches.value_of("token").unwrap();
-    let channel = matches.value_of("channel").unwrap();
-    println!("token: {}", token);
-    println!("channel: {}", channel);
-    println!("message: {}", message);
+    while bufferio.read_line(&mut message).unwrap() != 0 {
+        let token = matches.value_of("token").unwrap();
+        let channel = matches.value_of("channel").unwrap();
+        println!("token: {}", token);
+        println!("channel: {}", channel);
+        println!("message: {}", message);
+        message = String::new();
+    }
 }
