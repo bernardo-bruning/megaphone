@@ -1,4 +1,4 @@
-use std::io::{self, Read};
+use std::io::{self, BufRead, BufReader};
 use clap::{Arg, App};
 fn main() {
     let matches = App::new("Megaphone")
@@ -18,8 +18,9 @@ fn main() {
              .value_name("CHANNEL"))
         .get_matches();
 
+    let mut bufferio = BufReader::new(io::stdin());
     let mut message = String::new();
-    io::stdin().read_to_string(&mut message).unwrap();
+    bufferio.read_line(&mut message).unwrap();
     let token = matches.value_of("token").unwrap();
     let channel = matches.value_of("channel").unwrap();
     println!("token: {}", token);
